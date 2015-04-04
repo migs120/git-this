@@ -1,4 +1,26 @@
 Rails.application.routes.draw do
+#   get 'sites/index'
+
+#   get 'sites/show'
+
+#   get 'sites/new'
+
+#   get 'sites/edit'
+  
+ 
+
+  devise_for :users
+   resources :users#, only: [:update]
+
+
+#  get 'welcome/index'
+
+#  get 'welcome/about'
+  
+  get 'about' => 'welcome#about'
+  
+  root to: 'welcome#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
