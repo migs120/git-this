@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-#   get 'sites/index'
-
-#   get 'sites/show'
-
-#   get 'sites/new'
-
-#   get 'sites/edit'
   
+
+  resources :main_categories do
+    resources :sub_categories do
+      resources :items
+    end
+  end
  
+     resources :sub_categories, only: [:show] 
 
   devise_for :users
    resources :users#, only: [:update]
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   
   get 'about' => 'welcome#about'
   
-  root to: 'welcome#index'
+  root to: 'main_categories#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

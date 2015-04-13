@@ -1,0 +1,8 @@
+<center>
+<h1><%= @mcategory.title %></h1>
+  
+  
+  <% @mcategory.sub_categories.each do |sub|%>
+  <p><%=sub.title%></p>
+  <%end%>
+</center>

@@ -7,6 +7,50 @@
  .nav {
    margin-top: 5px;
  }
+
+
+
+
+
+    p.main { 
+            background-color: lightgrey;
+             width: 90%; padding: 2px; margin: 2px; 
+             border-style: none; 
+              border-radius: 7px;
+               font-family: "Comic Sans MS", sans-serif;
+            }
+      p.sub {
+             
+             width: 70%; padding: 2px; margin: 2px; 
+               font-family: "Comic Sans MS", sans-serif;
+              
+            }
+  div.div1 {
+           border:none;
+            width:90%;
+            -webkit-column-count: 3;
+            -moz-column-count: 3;
+            column-count: 3;   
+          }
+      h1 {
+          /*border-bottom-style: solid; */
+          color:grey;
+         margin-bottom: 50px;  
+        font-family: "Comic Sans MS", sans-serif;
+      
+          }
+  
+  .top-op {
+            display: inline;
+    
+            }
+  
+  .head2{
+        border-bottom:solid;
+        border-color:lightgrey;
+        margin-bottom: 50px;
+        }
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.

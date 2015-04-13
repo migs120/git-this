@@ -53,6 +53,37 @@
  member.save!
 
 
+
+# Create main_categories
+ 15.times do
+   MainCategory.create!(
+     title: Faker::Lorem.sentence,
+     body:  Faker::Lorem.paragraph
+   )
+ end
+main_categories = MainCategory.all
+
+# Create Sub_categories
+ 50.times do
+   SubCategory.create!(
+     # user:   users.sample,
+     main_category:  main_categories.sample,
+     title:  Faker::Lorem.sentence,
+     body:   Faker::Lorem.paragraph
+   )
+ end
+sub_categories = SubCategory.all
+ 
+# Create Items
+ 100.times do
+      
+   Item.create!(
+     #user: users.sample,
+     sub_category: sub_categories.sample,
+     name:  Faker::Lorem.sentence,
+     body: Faker::Lorem.paragraph
+   )
+ end
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #

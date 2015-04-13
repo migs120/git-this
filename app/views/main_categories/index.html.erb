@@ -1,0 +1,38 @@
+<center>
+<div class="head2">
+<h1 class="top-op">Git-This.Com</h1>
+ <p class="top-op" style="float:left; margin-top:10px; margin-left:16px;"><%= link_to "Options", '#' %></p>
+  <p class="top-op" style="float:right;  margin-top:10px; margin-left:16px;"> <%= link_to "New", new_main_category_path %> </p>
+</div> 
+<div class="div1">
+    <% @mcategories.each do |cat| %>
+  <p class="main"><%=link_to cat.title, edit_main_category_path(cat.id) %></p>
+  
+              <%cat.sub_categories.each do |scat| %>
+              <p class='sub'><%=link_to scat.title, scat %></p>
+              <%end%>
+    <% end   %>
+ </div> 
+   <center/>
+ 
+  
+  
+  
+  
+  
+  
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+  
+ 

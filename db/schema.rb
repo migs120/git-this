@@ -11,9 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309165829) do
+ActiveRecord::Schema.define(version: 20150406164152) do
 
+  create_table "items", force: true do |t|
+    t.string   "name"
+    t.text     "body"
+    t.string   "avatar"
+    t.integer  "sub_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
+  add_index "items", ["sub_category_id"], name: "index_items_on_sub_category_id"
+  add_index "items", ["user_id"], name: "index_items_on_user_id"
+
+  create_table "main_categories", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sub_categories", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "main_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sub_categories", ["main_category_id"], name: "index_sub_categories_on_main_category_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

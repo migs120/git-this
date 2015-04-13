@@ -1,0 +1,5 @@
+<h3 style="color: blue"><%= @scategory.main_category.title %></h3>
+<h1><%=@scategory.title%></h1>
+<% @scategory.items.each do |item|%>
+<p><%=item.name %></p>
+<% end%>
