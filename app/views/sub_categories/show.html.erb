@@ -1,5 +1,10 @@
-<h3 style="color: blue"><%= @scategory.main_category.title %></h3>
-<h1><%=@scategory.title%></h1>
+<h1 style="color: lightgrey"><%= @scategory.main_category.title %></h1>
+<h2><%=@scategory.title%></h2>
+<p><button><%=link_to "Post Item Here", new_sub_category_item_path(@scategory.id)%></button></p>
 <% @scategory.items.each do |item|%>
-<p><%=item.name %></p>
+<p style="color:red;">
+ <%= item.avatar.profile.url ? image_tag( item.avatar.profile.url ) : "" %>
+  <%=link_to item.name, sub_category_item_path( @scategory.id, item.id )  %>
+</p>
+
 <% end%>

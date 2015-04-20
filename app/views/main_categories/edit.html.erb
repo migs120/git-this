@@ -1,4 +1,4 @@
- <h1>Edit Category</h1>
+ <h1>Edit Main Category</h1>
  
  <div class="row">
    <div class="col-md-4" style="dispay:block;">
@@ -22,4 +22,12 @@
      <% end %>
    </div>
  </div>
-
+<center style="margin-top:50px; margin-bottom:100px;">
+  <h2>Sub Categories Edit</h2>
+  <p  style="margin-bottom:50px" ><%=link_to "New sub-category", new_main_category_sub_category_path(@mcategory.id) ,class: 'btn btn-success'%></p>
+<%@mcategory.sub_categories.each do |sub|%>
+  <p><%=link_to sub.title, edit_main_category_sub_category_path(@mcategory.id, sub.id)   %></p>
+  <%= image_tag( sub.avatar.profile.url ) %>
+  <%end%>
+  
+</center>

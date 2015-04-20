@@ -1,2 +1,23 @@
-<h1>Items#show</h1>
-<p>Find me in app/views/items/show.html.erb</p>
+<center>
+<h1><%=@item.name%></h1>
+  <p><button><%=link_to "edit item", edit_sub_category_item_path(@item.sub_category_id, @item.id)%></button></p>
+  <p > <%=image_tag( @item.avatar.profile.url ) %> </p>
+  <p> <%= @item.body %> </p>
+  
+      <%= form_tag charges_path do %>
+  <center> <article>
+    <label class="amount">
+      <span>  <h3>Git this</h3> <p>Amount: $15.00</p></span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" 
+          class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="Buy & DownLoad"
+          data-amount="1500">
+  </script> </center>
+
+
+<% end %>
+</center>

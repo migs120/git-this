@@ -2,7 +2,15 @@
 <h1><%= @mcategory.title %></h1>
   
   
-  <% @mcategory.sub_categories.each do |sub|%>
-  <p><%=sub.title%></p>
-  <%end%>
+<%@mcategory.sub_categories.each do |test|%>
+    <% test.items.each do |item| %>
+          <p>           
+            <%= item.avatar.profile.url ? image_tag( item.avatar.profile.url ) : "" %>
+            <%=link_to item.name, sub_category_item_path(item.sub_category_id, item.id)%>
+          </p>
+    <%end%>
+<%end%>
+  
 </center>
+
+

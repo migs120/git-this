@@ -1,2 +1,11 @@
-<h1>SubCategories#new</h1>
-<p>Find me in app/views/sub_categories/new.html.erb</p>
+<%= form_for [@mcategory, @scategory] do |f| %>
+   <%= f.label :title %>
+   <%= f.text_field :title %>
+ 
+   <%= f.label :body %>
+   <%= f.text_area :body %>
+ 
+   <%= f.submit "Save" %>
+ <% end %>
+<%=@mcategory.id%>
+

@@ -2,16 +2,26 @@
 <div class="head2">
 <h1 class="top-op">Git-This.Com</h1>
  <p class="top-op" style="float:left; margin-top:10px; margin-left:16px;"><%= link_to "Options", '#' %></p>
-  <p class="top-op" style="float:right;  margin-top:10px; margin-left:16px;"> <%= link_to "New", new_main_category_path %> </p>
+  <%if current_user and current_user.role =="admin"%>
+          <p class="top-op" style="float:right;  margin-top:10px; margin-left:16px;"> <%= link_to "New", new_main_category_path %> </p>
+      <%else%>
+          <p class="top-op" style="float:right;  margin-top:10px; margin-left:16px;"> <%= link_to "Post Item", new_main_category_path %> </p>
+  <%end%>
 </div> 
 <div class="div1">
     <% @mcategories.each do |cat| %>
-  <p class="main"><%=link_to cat.title, edit_main_category_path(cat.id) %></p>
+                <%if current_user and current_user.role == "admin"%>
+  <p class="main"><%=link_to cat.title, main_category_path(cat.id) %><%=link_to "Admin", edit_main_category_path(cat.id)%></p>
+                <%else%>
+                     <p class="main"><%=link_to cat.title,main_category_path(cat.id) %></p>
+                <%end%>
   
-              <%cat.sub_categories.each do |scat| %>
-              <p class='sub'><%=link_to scat.title, scat %></p>
-              <%end%>
-    <% end   %>
+                      <%cat.sub_categories.each do |scat| %>
+                              <p class='sub'><%= scat.avatar.profile.url ? image_tag( scat.avatar.profile.url ) : "" %>
+                                <%=link_to scat.title, scat %></p>
+ 
+                      <%end%>
+      <% end   %>
  </div> 
    <center/>
  

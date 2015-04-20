@@ -3,16 +3,17 @@ Rails.application.routes.draw do
 
   resources :main_categories do
     resources :sub_categories do
-      resources :items
+      #resources :items
     end
   end
- 
-     resources :sub_categories, only: [:show] 
+  
+  resources :sub_categories, only: [:show] do
+    resources :items
+  end
+    devise_for :users
+   resources :users #, only: [:update]
 
-  devise_for :users
-   resources :users#, only: [:update]
-
-
+resources :charges
 #  get 'welcome/index'
 
 #  get 'welcome/about'
