@@ -1,23 +1,116 @@
 <center>
 <h1><%=@item.name%></h1>
-  <p><button><%=link_to "edit item", edit_sub_category_item_path(@item.sub_category_id, @item.id)%></button></p>
+  <%if current_user%>
+        <% if current_user.role == "admin" || @item.user_id == current_user.id  %>
+              <p><button><%=link_to "edit item", edit_sub_category_item_path(@item.sub_category_id, @item.id)%></button></p>
+        <%end%>
+  <%end%>
+  
+  
   <p > <%=image_tag( @item.avatar.profile.url ) %> </p>
   <p> <%= @item.body %> </p>
   
-      <%= form_tag charges_path do %>
-  <center> <article>
-    <label class="amount">
-      <span>  <h3>Git this</h3> <p>Amount: $15.00</p></span>
-    </label>
-  </article>
+  
+  <% if current_user %>
+  <% match = current_user.purchases.where( Item_id: @item.id ).pluck[0] %>
+        <% # if Purchase.where(user_id: current_user.id) %>
+         <% if match %>
+                <h4>Already Purchased</h4>
+                <button>download</button>
+          <%else%>
+                        <%= form_tag item_charges_path(@item.id) do %>
+    
+                       <article>
+                          <label class="amount">
+                            <span>  <h3>Git this</h3> <p>Amount: $15.00</p></span>
+                          </label>
+                        </article>
 
-  <script src="https://checkout.stripe.com/checkout.js" 
-          class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="Buy & DownLoad"
-          data-amount="1500">
-  </script> </center>
-
-
-<% end %>
+                        <script src="https://checkout.stripe.com/checkout.js" 
+                                class="stripe-button"
+                                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                                data-description="<%=@item.name%>"
+                                data-amount="1500">
+                        </script>
+                        <% end %>
+        <%end%>
+  
+  <%else%>
+  <div style="margin-top:100px; ">
+  <p><b>To git this please sign in or sign up</b></p>
+<%=link_to "Sign in", user_session_path , class: 'btn btn-success'  %> or <%=link_to "Sign up", new_user_registration_path , class: 'btn btn-success'  %>
+  
+  
+  <%end%> 
+  
+  </div>
 </center>
+
+
+
+
+
+
+
+
+
+
+
+<%if current_user and current_user.role == "admin"%>
+
+
+<script>        /*document.getElementById("demo").innerHTML = "Change this";*/
+                  var form ="<input type='text' name='firstname'>"
+  
+                 function myFunction() { document.getElementById("demo").innerHTML = form  ;}
+                 /*function myFunction() { document.write("hay this" )}*/
+                   
+                  
+</script>
+
+<p id="demo" >
+          <button onclick="myFunction()">Git This</button>
+</p>
+
+
+<!-- <form> <input type='text' name='firstname'> </form> -->
+
+<% # Purchase.methods %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+<%    %>
+
+
+<%end%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

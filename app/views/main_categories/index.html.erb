@@ -4,8 +4,8 @@
  <p class="top-op" style="float:left; margin-top:10px; margin-left:16px;"><%= link_to "Options", '#' %></p>
   <%if current_user and current_user.role =="admin"%>
           <p class="top-op" style="float:right;  margin-top:10px; margin-left:16px;"> <%= link_to "New", new_main_category_path %> </p>
-      <%else%>
-          <p class="top-op" style="float:right;  margin-top:10px; margin-left:16px;"> <%= link_to "Post Item", new_main_category_path %> </p>
+  <%elsif current_user%>
+          <p class="top-op" style="float:right;  margin-top:10px; margin-left:16px;"> <%= link_to "Purchases", user_purchases_path(current_user.id) %> </p>
   <%end%>
 </div> 
 <div class="div1">

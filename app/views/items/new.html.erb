@@ -1,10 +1,37 @@
 <h1>Items new</h1>
 <%= form_for [ @scategory, @item ] do |f| %>
 <%= f.label :name %>
-<%= f.text_field :name %>
+<%= f.text_field :name %><br/><br/>
  
    <%= f.label :body %>
-   <%= f.text_area :body %>
+   <p style="width:100px;"><%= f.text_area :body %><p>
  
    <%= f.submit "Save" %>
  <% end %>
+
+ <h1>Post Item</h1>
+ 
+ <div class="row">
+   <div class="col-md-4">
+     <p>Guidelines for posts</p>
+     <ul>
+       <li>Nmone Yet!</li>
+  
+     </ul>
+   </div>
+   <div class="col-md-8">
+     <%= form_for [ @scategory, @item ] do |f| %>
+       <div class="form-group">
+         <%= f.label :name %>
+         <%= f.text_field :name, class: 'form-control', placeholder: "Enter post title" %>
+       </div>
+       <div class="form-group">
+         <%= f.label :body %>
+         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
+       </div>
+       <div class="form-group">
+         <%= f.submit "Save", class: 'btn btn-success' %>
+       </div>
+     <% end %>
+   </div>
+ </div>

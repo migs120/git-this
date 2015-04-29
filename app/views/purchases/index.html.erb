@@ -1,0 +1,8 @@
+<center style="margin-top: 100px;">
+  <h1>Purchases</h1>
+<% current_user.purchases.each do |p| %>
+
+  <p><%=link_to p.Item_name, sub_category_item_path(Item.where(id: p.Item_id)[0][:sub_category_id], p.Item_id) %></p>
+<%end%>
+
+</center>

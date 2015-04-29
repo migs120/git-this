@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @purchase = Purchase.new
   end
 
   def new
@@ -16,7 +17,7 @@ class ItemsController < ApplicationController
      
        @scategory= SubCategory.find(params[:sub_category_id])
        @item = @scategory.items.build(params.require(:item).permit(:name, :body, :avatar))
-    
+      
        if @item.save
          flash[:notice] = "Item was saved."
        

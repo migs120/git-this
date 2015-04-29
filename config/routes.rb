@@ -13,9 +13,16 @@ Rails.application.routes.draw do
     devise_for :users
    resources :users #, only: [:update]
 
-resources :charges
+  resources :items do
+    resources :charges
+  end
+  
+ resources :charges 
 #  get 'welcome/index'
 
+  resources :users do
+    resources :purchases
+  end
 #  get 'welcome/about'
   
   get 'about' => 'welcome#about'
