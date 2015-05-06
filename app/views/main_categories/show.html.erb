@@ -4,9 +4,12 @@
   
 <%@mcategory.sub_categories.each do |test|%>
     <% test.items.each do |item| %>
-          <p>           
-            <%= item.avatar.profile.url ? image_tag( item.avatar.profile.url ) : "" %>
+          <p> 
+            <% if item.avatar.url %>
+           <img src="<%= item.avatar.url %>"  width="42" height="42"> 
+            <% end %>                          
             <%=link_to item.name, sub_category_item_path(item.sub_category_id, item.id)%>
+            
           </p>
     <%end%>
 <%end%>

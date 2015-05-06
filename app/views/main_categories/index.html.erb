@@ -17,7 +17,10 @@
                 <%end%>
   
                       <%cat.sub_categories.each do |scat| %>
-                              <p class='sub'><%= scat.avatar.profile.url ? image_tag( scat.avatar.profile.url ) : "" %>
+                              <p class='sub' style=""><%# scat.avatar.url ? image_tag( scat.avatar.url ) : "" %>
+                              <%if scat.avatar.url%>
+                                <img src="<%= scat.avatar.url %>"  width="42" height="42">
+                                <%end%>
                                 <%=link_to scat.title, scat %></p>
  
                       <%end%>

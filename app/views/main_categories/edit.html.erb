@@ -27,7 +27,10 @@
   <p  style="margin-bottom:50px" ><%=link_to "New sub-category", new_main_category_sub_category_path(@mcategory.id) ,class: 'btn btn-success'%></p>
 <%@mcategory.sub_categories.each do |sub|%>
   <p><%=link_to sub.title, edit_main_category_sub_category_path(@mcategory.id, sub.id)   %></p>
-  <%= image_tag( sub.avatar.profile.url ) %>
+  
+        <%if sub.avatar.url  %>
+             <img src="<%= sub.avatar.url %>"  width="42" height="42"> 
+        <%end%>
   <%end%>
   
 </center>

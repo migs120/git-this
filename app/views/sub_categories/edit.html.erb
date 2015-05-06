@@ -16,7 +16,7 @@
          <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter category body" %>
        </div>
     
-     <%= image_tag( @scategory.avatar.profile.url ) %>
+     <%= image_tag( @scategory.avatar.url ) %>
         <div class="form-group">
          <%= f.label :avatar %>
          <%= f.file_field :avatar %>

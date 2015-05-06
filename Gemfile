@@ -53,3 +53,11 @@ gem 'bootstrap-sass', '~> 3.1.1'
  gem 'mini_magick'
 gem 'fog'
 gem 'stripe'
+
+group :test, :development do
+  gem 'cucumber-rails', :require => false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
+end
+
+

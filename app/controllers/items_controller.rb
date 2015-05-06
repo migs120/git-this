@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class ItemsController < ApplicationController
   def index
     @items = Item.all
@@ -6,6 +8,18 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @purchase = Purchase.new
+    respond_to do |format|
+      format.html
+      format.pdf { 
+        data = open @item.avatar.url, "r"
+        send_data data, type: "application/pdf", disposition: "attachment", :filename => @item.avatar.file.filename }
+    end
+    
+    def  download
+      send_file{  }
+    end
+    
+    
   end
 
   def new
@@ -16,12 +30,14 @@ class ItemsController < ApplicationController
      def create
      
        @scategory= SubCategory.find(params[:sub_category_id])
-       @item = @scategory.items.build(params.require(:item).permit(:name, :body, :avatar))
+       @item = @scategory.items.build(params.require(:item).permit(:name, :body, :avatar, :product, :price ))
       
        if @item.save
-         flash[:notice] = "Item was saved."
-       
-         redirect_to sub_category_path(@scategory)
+         #@item.update_attribute!(user_id: current_user.id)
+         Item.where(id: @item.id).update_all(user_id: current_user.id)
+         flash[:notice] = "Item was saved. "
+         redirect_to  new_item_item_pic_path(@item.id)
+        # redirect_to sub_category_path(@scategory)
        
      else
          flash[:error] = "There was an error saving the Item. Please try again."
@@ -35,16 +51,16 @@ class ItemsController < ApplicationController
     #@mcategory = MainCategory.find(params[:main_category_id])
     @scategory = SubCategory.find(params[:sub_category_id])
     @item = Item.find(params[:id])
-    
+    @item_pic = ItemPic.new
   end
   
     def update
        # @mcategory= MainCategory.find(params[:main_category_id])
       @scategory = SubCategory.find(params[:sub_category_id])
       @item = Item.find(params[:id])
-      if @item.update_attributes(params.require(:item).permit(:name, :body, :avatar))
+      if @item.update_attributes(params.require(:item).permit(:name, :body, :avatar, :price))
         flash[:notice] = "Item was updated."
-       redirect_to sub_category_path(@scategory)
+        redirect_to sub_category_item_path(@scategory, @item)
      else
         flash[:error] = "There was an error saving the item. Please try again."
        render :edit

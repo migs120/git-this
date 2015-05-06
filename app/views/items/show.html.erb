@@ -1,4 +1,4 @@
-<center>
+<center style="margin-bottom:100px;">
 <h1><%=@item.name%></h1>
   <%if current_user%>
         <% if current_user.role == "admin" || @item.user_id == current_user.id  %>
@@ -6,8 +6,13 @@
         <%end%>
   <%end%>
   
-  
-  <p > <%=image_tag( @item.avatar.profile.url ) %> </p>
+  <%if @item.item_pics.length >= 1  %>
+        <% @item.item_pics.each do |pic|%>
+        <div style="display:inline;">
+           <%= image_tag( pic.avatar.url, size: "200" ) %> 
+          <%end%>
+         </div>
+  <%end%>
   <p> <%= @item.body %> </p>
   
   
@@ -15,14 +20,18 @@
   <% match = current_user.purchases.where( Item_id: @item.id ).pluck[0] %>
         <% # if Purchase.where(user_id: current_user.id) %>
          <% if match %>
-                <h4>Already Purchased</h4>
-                <button>download</button>
+                <div style="margin-top:100px;">
+                <h4>Already Purchased</h4> 
+            
+     <a class='btn btn-success' href="<%=@item.avatar%>" download >download</a>
+                  <%=link_to "download", sub_category_item_path(@item.sub_category_id, @item, format: "pdf"), class: 'btn btn-success'%>
+                 </div> 
           <%else%>
                         <%= form_tag item_charges_path(@item.id) do %>
     
                        <article>
                           <label class="amount">
-                            <span>  <h3>Git this</h3> <p>Amount: $15.00</p></span>
+                            <span>  <h3>Git this</h3> <p>Amount: <%= @item.price == nil ? "Free" : "#{@item.price}$" %></p></span>
                           </label>
                         </article>
 
@@ -30,7 +39,7 @@
                                 class="stripe-button"
                                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                                 data-description="<%=@item.name%>"
-                                data-amount="1500">
+                                data-amount="<%= @item.price.to_i*100 %>">
                         </script>
                         <% end %>
         <%end%>
@@ -55,38 +64,6 @@
 
 
 
-
-<%if current_user and current_user.role == "admin"%>
-
-
-<script>        /*document.getElementById("demo").innerHTML = "Change this";*/
-                  var form ="<input type='text' name='firstname'>"
-  
-                 function myFunction() { document.getElementById("demo").innerHTML = form  ;}
-                 /*function myFunction() { document.write("hay this" )}*/
-                   
-                  
-</script>
-
-<p id="demo" >
-          <button onclick="myFunction()">Git This</button>
-</p>
-
-
-<!-- <form> <input type='text' name='firstname'> </form> -->
-
-<% # Purchase.methods %>
-<%    %>
-<%    %>
-<%    %>
-<%    %>
-<%    %>
-<%    %>
-<%    %>
-<%    %>
-
-
-<%end%>
 
 
 

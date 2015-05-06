@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   end
 #  get 'welcome/about'
   
+  resources :items do
+    resources :item_pics
+  end
+  
   get 'about' => 'welcome#about'
   
   root to: 'main_categories#index'

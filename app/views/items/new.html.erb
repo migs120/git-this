@@ -1,15 +1,5 @@
-<h1>Items new</h1>
-<%= form_for [ @scategory, @item ] do |f| %>
-<%= f.label :name %>
-<%= f.text_field :name %><br/><br/>
- 
-   <%= f.label :body %>
-   <p style="width:100px;"><%= f.text_area :body %><p>
- 
-   <%= f.submit "Save" %>
- <% end %>
 
- <h1>Post Item</h1>
+<h1>Post Item</h1>
  
  <div class="row">
    <div class="col-md-4">
@@ -23,15 +13,31 @@
      <%= form_for [ @scategory, @item ] do |f| %>
        <div class="form-group">
          <%= f.label :name %>
-         <%= f.text_field :name, class: 'form-control', placeholder: "Enter post title" %>
+         <%= f.text_field :name, class: 'form-control', placeholder: "Enter item title" %>
        </div>
        <div class="form-group">
          <%= f.label :body %>
-         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
+         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter item description" %>
        </div>
+     
+        <div class="form-group">
+          <%= f.label :price %>
+          <%= f.text_field :price, class: 'form-control', placeholder: "Enter item price" %>
+       </div>
+     
+        <div class="form-group">
+         <%= f.label "Product" %>
+         <%= f.file_field :avatar %>
+         <%= f.hidden_field :avatar_cache %>
+       </div>
+    
+     
        <div class="form-group">
          <%= f.submit "Save", class: 'btn btn-success' %>
        </div>
      <% end %>
    </div>
- </div>
+   
+     <%# render 'item_pics/newpics' %>
+   
+</div>
