@@ -1,4 +1,8 @@
+
 <center style="margin-bottom:100px;">
+<div style="display:box; background-color:#F5F5F5; 
+            width:90%; padding-bottom:400px; padding-top:60px;
+            border-radius: 25px; ">
 <h1><%=@item.name%></h1>
   <%if current_user%>
         <% if current_user.role == "admin" || @item.user_id == current_user.id  %>
@@ -7,13 +11,55 @@
   <%end%>
   
   <%if @item.item_pics.length >= 1  %>
-        <% @item.item_pics.each do |pic|%>
-        <div style="display:inline;">
-           <%= image_tag( pic.avatar.url, size: "200" ) %> 
-          <%end%>
-         </div>
-  <%end%>
-  <p> <%= @item.body %> </p>
+  
+<script>
+
+      var num=1
+      <%i=0%>
+<% @item.item_pics.each do |pic|%>
+          <% n = i+=1%>
+      img<%=n%> = new Image ()
+      img<%=n%>.src = "<%=pic.avatar.url%>"
+<%end%>
+
+function slideshowUp()
+					{
+					num=num+1
+					if (num==5)
+								{num=1}
+					document.mypic.src=eval("img"+num+".src")
+
+					}
+
+function slideshowBack()
+						{
+							num=num-1
+							if (num==0)
+										{num=4}
+							document.mypic.src=eval("img"+num+".src")
+						}
+
+</script>
+
+<!-- The Image and Form Codes are Below --> 
+
+
+<IMG SRC="<%=@item.item_pics.first.avatar.url%>" 
+NAME="mypic" width="300" style="margin-bottom:10px;"><br/>
+
+
+
+
+
+  <a href="JavaScript:slideshowBack()" style="margin-right:20px;"> Back</a><%= "#{@item.item_pics.length}pics" %>
+
+<a href="JavaScript:slideshowUp()" style="margin-left:20px;"> Next</a> 
+
+
+
+
+<%end%>
+  <p style="margin-top:20px; padding-right:40px; padding-left:40px;" > <%= @item.body %> </p>
   
   
   <% if current_user %>
@@ -23,7 +69,7 @@
                 <div style="margin-top:100px;">
                 <h4>Already Purchased</h4> 
             
-     <a class='btn btn-success' href="<%=@item.avatar%>" download >download</a>
+                  <!--  <a class='btn btn-success' href="<%=@item.avatar%>" download >download</a> -->
                   <%=link_to "download", sub_category_item_path(@item.sub_category_id, @item, format: "pdf"), class: 'btn btn-success'%>
                  </div> 
           <%else%>
@@ -53,10 +99,8 @@
   <%end%> 
   
   </div>
+  </div>
 </center>
-
-
-
 
 
 

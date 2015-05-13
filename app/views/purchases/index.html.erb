@@ -1,8 +1,8 @@
-<center style="margin-top: 100px;">
+<div style="margin-top: 100px;">
   <h1>Purchases</h1>
 <% current_user.purchases.each do |p| %>
 
-  <p><%=link_to p.Item_name, sub_category_item_path(Item.where(id: p.Item_id)[0][:sub_category_id], p.Item_id) %></p>
+  <p><%=image_tag(ItemPic.where(item_id: p.Item_id)[0].avatar.url, size: "60" ) %><%=link_to p.Item_name, sub_category_item_path(Item.where(id: p.Item_id)[0][:sub_category_id], p.Item_id) %></p>
 <%end%>
 
-</center>
+</div>

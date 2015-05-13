@@ -1,11 +1,14 @@
 <center>
+  <div style="display:box; background-color:#F5F5F5; 
+            width:90%; padding-bottom:400px; padding-top:60px;
+            border-radius: 25px; ">
 <div class="head2">
 <h1 class="top-op">Git-This.Com</h1>
  <p class="top-op" style="float:left; margin-top:10px; margin-left:16px;"><%= link_to "Options", '#' %></p>
   <%if current_user and current_user.role =="admin"%>
           <p class="top-op" style="float:right;  margin-top:10px; margin-left:16px;"> <%= link_to "New", new_main_category_path %> </p>
   <%elsif current_user%>
-          <p class="top-op" style="float:right;  margin-top:10px; margin-left:16px;"> <%= link_to "Purchases", user_purchases_path(current_user.id) %> </p>
+          <p class="top-op" style="float:right;  margin-top:10px; margin-left:16px; margin-right:10px;"> <%= link_to "Purchases", user_purchases_path(current_user.id) %> </p>
   <%end%>
 </div> 
 <div class="div1">
@@ -26,6 +29,7 @@
                       <%end%>
       <% end   %>
  </div> 
+    </div>
    <center/>
  
   
