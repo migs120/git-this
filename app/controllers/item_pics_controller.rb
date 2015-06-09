@@ -15,7 +15,8 @@ class ItemPicsController < ApplicationController
          @item_pic = @item.item_pics.new(params.require(:item_pic).permit(:avatar, :item_id))
          if @item_pic.save
            flash[:notice] = "Picture was saved to Item."
-           redirect_to sub_category_item_path(@item.sub_category_id, @item.id)
+           #redirect_to sub_category_item_path(@item.sub_category_id, @item.id)
+           redirect_to edit_sub_category_item_path(@item.sub_category_id, @item.id)
      else
            flash[:error] = "There was an error saving the Picture. Please try again."
        render :new

@@ -11,8 +11,11 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf { 
-        data = open @item.avatar.url, "r"
-        send_data data, type: "application/pdf", disposition: "attachment", :filename => @item.avatar.file.filename }
+        #data = open @item.avatar.url, "r"
+        #send_data data, type: "application/pdf", disposition: "attachment", :filename => @item.avatar.file.filename }
+        
+        data = open @item.product.url, "r"
+        send_data data, type: "application/pdf", disposition: "attachment", :filename => @item.product.file.filename }
     end
     
     def  download
@@ -58,12 +61,13 @@ class ItemsController < ApplicationController
        # @mcategory= MainCategory.find(params[:main_category_id])
       @scategory = SubCategory.find(params[:sub_category_id])
       @item = Item.find(params[:id])
-      if @item.update_attributes(params.require(:item).permit(:name, :body, :avatar, :price))
+      if @item.update_attributes(params.require(:item).permit(:name, :body, :avatar, :price, :product))
         flash[:notice] = "Item was updated."
         redirect_to sub_category_item_path(@scategory, @item)
      else
         flash[:error] = "There was an error saving the item. Please try again."
-       render :edit
+        # render :edit
+        redirect_to edit_sub_category_item_path(@scategory, @item)
      end
    end
   
